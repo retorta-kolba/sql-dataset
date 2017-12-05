@@ -1,0 +1,6 @@
+<h1>Все датасеты:</h1>
+{% for dataset in datasets %}
+<p>
+<a href=/dataset/{{dataset.id}}>{{dataset.origname}}</a> <br>
+</p>
+{% endfor %}
