@@ -4,5 +4,10 @@ from django.conf.urls import url
 urlpatterns = [
     url(r'^aa$', views.test , name='account'),
     url(r'^datasets/$', views.datasets , name='datasets'),
+    url(r'^datasources/$', views.datasources , name='datasources'),
+    url(r'^sciencefields/$', views.sciencefields , name='sciencefields'),
     url(r'^dataset/(?P<id>\d+)$', views.dataset , name='dataset'),
+    url(r'^datasource/(?P<id>\d+)$', views.datasource , name='datasource'),
+    url(r'^sciencefield/(?P<id>\d+)$', views.sciencefield , name='sciencefield'),
+    url(r'^$', views.index, name='index')
 ]

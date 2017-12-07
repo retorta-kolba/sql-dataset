@@ -1,0 +1,6 @@
+<h1>Все источники данных:</h1>
+{% for sciencefield in sciencefields %}
+<p>
+<a href=/sciencefield/{{sciencefield.id}}>{{sciencefield.name}}</a> <br>
+</p>
+{% endfor %}

@@ -1,0 +1,6 @@
+<h1>Все источники данных:</h1>
+{% for datasource in datasources %}
+<p>
+<a href=/datasource/{{datasource.id}}>{{datasource.name}}</a> <br>
+</p>
+{% endfor %}
