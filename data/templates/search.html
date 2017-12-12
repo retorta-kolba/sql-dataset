@@ -1,0 +1,16 @@
+<style>
+td{
+   text-align: center;
+}
+</style>
+
+<h1>Задачи</h1>
+<form action="/search" enctype="multipart/form-data" method="post">
+    {% csrf_token %}
+{{form.as_table}}
+   <p><input type="submit" value="Показать"></p>
+</form>
+
+{% for d in datasets %}
+<a href=/dataset/{{d.id}}>{{d.origname}}</a> <br>
+{%endfor%}

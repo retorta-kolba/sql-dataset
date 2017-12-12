@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from data.models import *
 from django.core.exceptions import ObjectDoesNotExist
+from django.http import HttpResponseForbidden, HttpResponseNotFound
+from data.form import DataForm
 def datasets(request):
     datasets = DataSet.objects.all()
     return render(request, 'datasets.html', {'datasets':datasets})
@@ -12,6 +14,21 @@ def dataset(request, id):
         return render(request, 'dataset.html', {'dataset':dataset, 'fields': fields})
     except ObjectDoesNotExist:
         return HttpResponseNotFound("<h1>Такого датасета нет</h1>")
+
+def search(request):
+    if request.method == 'POST':
+        form = DataForm(request.POST, request.FILES)
+        if form.is_valid():
+            ds = DataSet.objects.all()
+            if form['sciencefields'].value():
+                ds = ds.filter(sciencefield__in=form['sciencefields'].value())
+            if form['text'].value():
+                ds = ds.filter(origname__icontains=form['text'].value())
+            return render(request, 'search.html',{'form':form,'datasets':ds})
+        else:
+            return render(request, 'search.html',{'form':DataForm()})
+    return render(request, 'search.html',{'form':DataForm()})
+
 
 def datasources(request):
     datasources = DataSource.objects.all()
