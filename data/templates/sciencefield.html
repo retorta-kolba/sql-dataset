@@ -5,3 +5,7 @@
 {{datasource.description}}
 </p>
 {% endif %}
+<h2>Список датасетов:</h2>
+{% for d in datasets %}
+<a href=/dataset/{{d.id}}>{{d.origname}}</a> <br>
+{%endfor%}
