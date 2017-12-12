@@ -24,6 +24,8 @@ def search(request):
                 ds = ds.filter(sciencefield__in=form['sciencefields'].value())
             if form['text'].value():
                 ds = ds.filter(origname__icontains=form['text'].value())
+            if form['fieldtext'].value():
+                ds = ds & DataSet.objects.filter(field__name__icontains=form['fieldtext'].value())
             return render(request, 'search.html',{'form':form,'datasets':ds})
         else:
             return render(request, 'search.html',{'form':DataForm()})
