@@ -3,9 +3,22 @@ from data.models import *
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseForbidden, HttpResponseNotFound
 from data.form import DataForm
+
 def datasets(request):
     datasets = DataSet.objects.all()
     return render(request, 'datasets.html', {'datasets':datasets})
+
+def authors(request):
+    authors = Author.objects.all()
+    return render(request, 'authors.html', {'authors':authors})
+
+def author(request, id):
+    try:
+        author = Author.objects.get(id=id)
+        ds = DataSet.objects.filter(author=author)
+        return render(request, 'author.html', {'author':author, 'datasets':ds})
+    except ObjectDoesNotExist:
+        return HttpResponseNotFound("<h1>Такого автора нет</h1>")
 
 def dataset(request, id):
     try:
@@ -80,17 +93,25 @@ def gorcscf(metaid, name=''):
     d.save()
     return d
 
+def gorca(metaid, name):
+    d, c = Author.objects.get_or_create(metaid=metaid)
+    d.name = name
+    d.save()
+    return d
+
 def test(request):
-    datasource = DataSource.objects.get(id=3)
-    for i in range(3300, 3400):
+    datasource = DataSource.objects.get(id=1)
+    for i in range(3000, 3400):
         d = getdataset(i)
         if d is not None:
-            scf = gorcscf(d['CategoryId'],d['CategoryCaption'])
+            scf = gorcscf(d['CategoryId'], d['CategoryCaption'])
+            au = gorca(d['DepartmentId'], d['DepartmentCaption'])
             dt = datetime.strptime(d['VersionDate'], '%d.%m.%Y')
-            dase, fl = DataSet.objects.get_or_create(size=d['ItemsCount'],lastupdate=dt,origname=d['Caption'],url='https://data.mos.ru/opendata/'+str(d['Id']),datasource=datasource,sciencefield=scf,description=d['FullDescription'] if d['FullDescription'] else d['Description'])
+            #print(dt)
+            dase, fl = DataSet.objects.get_or_create(author=au, size=d['ItemsCount'],lastupdate=dt,origname=d['Caption'],url='https://data.mos.ru/opendata/'+str(d['Id']),datasource=datasource,sciencefield=scf,description=d['FullDescription'] if d['FullDescription'] else d['Description'])
             dase.save()
             for j, field in enumerate(d['Columns']):
-                f, fl = Field.objects.get_or_create(name=field['Caption'], num = j, dataset = dase)
+                f, fl = Field.objects.get_or_create(name=field['Caption'], num = j, dataset = dase, type=field['Type'])
                 f.save()
         print(i)
 

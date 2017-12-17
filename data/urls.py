@@ -9,6 +9,8 @@ urlpatterns = [
     url(r'^dataset/(?P<id>\d+)$', views.dataset , name='dataset'),
     url(r'^datasource/(?P<id>\d+)$', views.datasource , name='datasource'),
     url(r'^sciencefield/(?P<id>\d+)$', views.sciencefield , name='sciencefield'),
+    url(r'^authors/$', views.authors , name='authors'),
+    url(r'^author/(?P<id>\d+)$', views.author , name='author'),
     url(r'^search', views.search, name='search'),
     url(r'^$', views.index, name='index')
 ]

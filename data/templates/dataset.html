@@ -1,13 +1,28 @@
+<style>
+td{
+   text-align: center;
+}
+</style>
+
 <h2>Оригинальное название датасета: {{dataset.origname}}</h2>
-<h3><a href=/datasource/{{dataset.datasource.id}}>{{dataset.datasource.name}}</a></h3>
-<h3><a href=/sciencefield/{{dataset.sciencefield.id}}>{{dataset.sciencefield.name}}</a></h3>
+<h3>Источник: <a href=/datasource/{{dataset.datasource.id}}>{{dataset.datasource.name}}</a></h3>
+<h3>Тема: <a href=/sciencefield/{{dataset.sciencefield.id}}>{{dataset.sciencefield.name}}</a></h3>
+<h3>Автор: <a href=/author/{{dataset.author.id}}>{{dataset.author.name}}</a></h3>
+<h3>Дата: {{dataset.lastupdate}}</h3>
 {% if dataset.engname %}
 <h3>Перевод названия датасета: {{dataset.engname}}</h3>
 {% endif %}
 <h3>Размер: {{dataset.size}}</h3>
 <h3><a href={{dataset.url}}>Ссылка</a></h3>
 <h3>Поля:</h3>
+<table>
+<tr><th>Номер</th><th>Имя</th><th>Тип</th></tr> 
 {% for i in fields %}
-{{i.num}} {{i.name}} <br>
+    <tr>
+        <td>{{i.num}}</td>
+        <td>{{i.name}}</td>
+        <td>{{i.type}}</td>
+    </tr>
 {% endfor %}
+</table>
 <h3>Описание: </h3>{{dataset.description|safe}}

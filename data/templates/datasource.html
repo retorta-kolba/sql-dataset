@@ -2,6 +2,7 @@
 {% if datasource.url %}
 <a href="{{datasource.url}}">Ссылка на источник</a>
 {% endif %}
+<h3>Количество датасетов: {{datasets|length}}</h3>
 <h2>Список датасетов:</h2>
 {% for d in datasets %}
 <a href=/dataset/{{d.id}}>{{d.origname}}</a> <br>
