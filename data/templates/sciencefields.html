@@ -1,6 +1,10 @@
 <h1>Все тематики:</h1>
+<table>
+    <tr><th>Название</th><th>Количество</th></tr>
 {% for sciencefield in sciencefields %}
-<p>
-<a href=/sciencefield/{{sciencefield.id}}>{{sciencefield.name}}</a> <br>
-</p>
+    <tr>
+        <td><a href=/sciencefield/{{sciencefield.id}}>{{sciencefield.name}}</a> </td>
+        <td>{{sciencefield.dataset.all|length}}</td>
+    </tr>
 {% endfor %}
+</table>

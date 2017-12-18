@@ -1,6 +1,10 @@
 <h1>Все источники данных:</h1>
+<table>
+    <tr><th>Название</th><th>Количество</th></tr>
 {% for datasource in datasources %}
-<p>
-<a href=/datasource/{{datasource.id}}>{{datasource.name}}</a> <br>
-</p>
+<tr>
+<td><a href=/datasource/{{datasource.id}}>{{datasource.name}}</a></td>
+<td>{{datasource.set.all|length}}</td>
+</tr>
 {% endfor %}
+</table>

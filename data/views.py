@@ -53,7 +53,6 @@ def datasource(request, id):
     try:
         datasource = DataSource.objects.get(id=id)
         ds = DataSet.objects.filter(datasource=datasource)
-        print(ds)
         return render(request, 'datasource.html', {'datasource':datasource, 'datasets':ds})
     except ObjectDoesNotExist:
         return HttpResponseNotFound("<h1>Такого источника данных нет</h1>")

@@ -1,11 +1,12 @@
 <h1>Все авторы:</h1>
 <table>
+    <tr><th>Название</th><th>Количество</th></tr>
 {% for author in authors %}
-<p>
+
     <tr>
         <td><a href=/author/{{author.id}}>{{author.name}}</a> </td>
         <td>{{author.dataset.all|length}}</td>
-</p>
+
     </tr>
 {% endfor %}
 </table>
