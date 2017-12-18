@@ -90,6 +90,62 @@ def newdataset(request, id = None):
             df = DataSetForm()
         return render(request, 'newdataset.html',{'form':df})
     
+def newauthor(request, id = None):
+    if request.method == 'POST':
+        try:
+            ds = Author.objects.get(id=id)
+            form = AuthorForm(request.POST, instance=ds)
+        except ObjectDoesNotExist:
+            form = AuthorForm(request.POST)
+        if form.is_valid():
+            nd = form.save()
+            return redirect('/author/' + str(nd.id))
+        return render(request, 'newdataset.html',{'form':form,'error':'Ошибка формы'})
+    else:
+        try:
+            ds = Author.objects.get(id=id)
+            df = AuthorForm(instance=ds)
+        except ObjectDoesNotExist:
+            df = AuthorForm()
+        return render(request, 'newdataset.html',{'form':df})
+
+def newsciencefield(request, id = None):
+    if request.method == 'POST':
+        try:
+            ds = ScienceField.objects.get(id=id)
+            form = ScienceForm(request.POST, instance=ds)
+        except ObjectDoesNotExist:
+            form = ScienceForm(request.POST)
+        if form.is_valid():
+            nd = form.save()
+            return redirect('/scienceform/' + str(nd.id))
+        return render(request, 'newdataset.html',{'form':form,'error':'Ошибка формы'})
+    else:
+        try:
+            ds = ScienceField.objects.get(id=id)
+            df = ScienceForm(instance=ds)
+        except ObjectDoesNotExist:
+            df = ScienceForm()
+        return render(request, 'newdataset.html',{'form':df})
+
+def newdatasource(request, id = None):
+    if request.method == 'POST':
+        try:
+            ds = DataSource.objects.get(id=id)
+            form = DataSourceForm(request.POST, instance=ds)
+        except ObjectDoesNotExist:
+            form = DataSourceForm(request.POST)
+        if form.is_valid():
+            nd = form.save()
+            return redirect('/datasource/' + str(nd.id))
+        return render(request, 'newdataset.html',{'form':form,'error':'Ошибка формы'})
+    else:
+        try:
+            ds = DataSource.objects.get(id=id)
+            df = DataSourceForm(instance=ds)
+        except ObjectDoesNotExist:
+            df = DataSourceForm()
+        return render(request, 'newdataset.html',{'form':df})
 
 
 from urllib.request import *

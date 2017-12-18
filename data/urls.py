@@ -14,5 +14,11 @@ urlpatterns = [
     url(r'^authors/$', views.authors , name='authors'),
     url(r'^author/(?P<id>\d+)$', views.author , name='author'),
     url(r'^search', views.search, name='search'),
-    url(r'^$', views.index, name='index')
+    url(r'^author/(?P<id>\d+)/edit$', views.newauthor , name='dataset'),
+    url(r'^author/new$', views.newauthor, name='newdataset'),
+    url(r'^$', views.index, name='index'),
+    url(r'^sciencefield/new$', views.newsciencefield, name='newdataset'),
+    url(r'^datasource/new$', views.newdatasource, name='newdataset'),
+    url(r'^sciencefield/(?P<id>\d+)/edit$', views.newsciencefield , name='dataset'),
+    url(r'^datasource/(?P<id>\d+)/edit$', views.newdatasource , name='dataset'),
 ]

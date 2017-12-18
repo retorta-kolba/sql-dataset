@@ -48,6 +48,26 @@ class Field(models.Model):
         return str(self.id) + ' ' + self.name
 
 
+class DataSourceForm(ModelForm):
+    class Meta:
+        model = DataSource
+        fields = ['id', 'name', 'url']
+
+class ScienceForm(ModelForm):
+    class Meta:
+        model = ScienceField
+        fields = ['id', 'name', 'description']
+
+class AuthorForm(ModelForm):
+    class Meta:
+        model = Author
+        fields = ['id', 'name']
+
+class FieldForm(ModelForm):
+    class Meta:
+        model = Field
+        fields = ['id', 'name', 'num', 'dataset']
+
 class DataSetForm(ModelForm):
     class Meta:
         model = DataSet
