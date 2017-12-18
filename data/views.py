@@ -72,7 +72,25 @@ def sciencefield(request, id):
         return HttpResponseNotFound("<h1>Такой области нет</h1>")
 
 
-
+def newdataset(request, id = None):
+    if request.method == 'POST':
+        try:
+            ds = DataSet.objects.get(id=id)
+            form = DataSetForm(request.POST, instance=ds)
+        except ObjectDoesNotExist:
+            form = DataSetForm(request.POST)
+        if form.is_valid():
+            nd = form.save()
+            return redirect('/dataset/' + str(nd.id))
+        return render(request, 'newdataset.html',{'form':form,'error':'Ошибка формы'})
+    else:
+        try:
+            ds = DataSet.objects.get(id=id)
+            df = DataSetForm(instance=ds)
+        except ObjectDoesNotExist:
+            df = DataSetForm()
+        return render(request, 'newdataset.html',{'form':df})
+    
 
 
 from urllib.request import *

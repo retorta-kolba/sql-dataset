@@ -1,4 +1,5 @@
 from django.db import models
+from django.forms import ModelForm
 
 # Create your models here.
 class DataSource(models.Model):
@@ -46,3 +47,8 @@ class Field(models.Model):
     def __str__(self):
         return str(self.id) + ' ' + self.name
 
+
+class DataSetForm(ModelForm):
+    class Meta:
+        model = DataSet
+        fields = ['id', 'origname', 'author', 'datasource','sciencefield','lastupdate','size','url','description']
