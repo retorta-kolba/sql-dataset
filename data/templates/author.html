@@ -1,6 +1,8 @@
 
 <h1>Автор: {{author.name}}</h1>
 <a href=/author/{{author.id}}/edit>Редактировать</a>
+<h3>Контакты: {{ author.contacts|default_if_none:"--" }}
+</h3>
 <h3>Количество датасетов: {{datasets|length}}</h3>
 <h2>Список датасетов:</h2>
 {% for d in datasets %}

@@ -20,6 +20,7 @@ class ScienceField(models.Model):
 class Author(models.Model):
     id = models.AutoField(primary_key=True,unique=True)
     name = models.TextField()
+    contacts = models.TextField(blank=True, null=True)
     metaid = models.IntegerField(blank=True, null=True)
     def __str__(self):
         return str(self.id) + ' ' + self.name
