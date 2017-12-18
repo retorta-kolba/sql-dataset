@@ -38,7 +38,9 @@ def search(request):
             if form['text'].value():
                 ds = ds.filter(origname__icontains=form['text'].value())
             if form['fieldtext'].value():
-                ds = ds & DataSet.objects.filter(field__name__icontains=form['fieldtext'].value())
+                ds = ds.filter(field__name__icontains=form['fieldtext'].value())
+            if form['authors'].value():
+                ds = ds.filter(author__in=form['authors'].value())
             return render(request, 'search.html',{'form':form,'datasets':ds})
         else:
             return render(request, 'search.html',{'form':DataForm()})
