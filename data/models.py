@@ -22,6 +22,7 @@ class Author(models.Model):
     name = models.TextField()
     contacts = models.TextField(blank=True, null=True)
     metaid = models.IntegerField(blank=True, null=True)
+    sources = models.ManyToManyField(DataSource, related_name='authors')
     def __str__(self):
         return str(self.id) + ' ' + self.name
 
@@ -62,7 +63,7 @@ class ScienceForm(ModelForm):
 class AuthorForm(ModelForm):
     class Meta:
         model = Author
-        fields = ['id', 'name']
+        fields = ['id', 'name', 'contacts','sources']
 
 class FieldForm(ModelForm):
     class Meta:
